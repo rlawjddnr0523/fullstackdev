@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/*#root {*/
+/*    background: var(--bs-dark-bg-subtle);*/
+/*}*/
+html {
+
+}
+body {
+    --bs-bg-opacity: 1;
+    background-color: rgba(43,48,53) !important;
+}
+ul {
+    list-style: none;
+}
+.cont {
+    display: flex;
+    justify-content: space-between;
+}
+a {
+    text-decoration-line: none !important;
+}
+.form-control {
+    width: auto !important;
+}
+.searchbar > .hstack {
+    justify-content: center;
+    height: 7vh;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    width: auto;
+    max-width: 400px; /* 폼의 최대 너비를 400px로 조정 */
+    padding: 30px; /* 내부 패딩을 30px로 조정 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 폼에 그림자 효과 추가 */
+    border-radius: 5px; /* 폼 모서리를 둥글게 */
+    margin-top: 10%;
+}
+.register-form {
+    width: auto;
+    max-width: 400px; /* 폼의 최대 너비를 400px로 조정 */
+    padding: 30px; /* 내부 패딩을 30px로 조정 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 폼에 그림자 효과 추가 */
+    border-radius: 5px; /* 폼 모서리를 둥글게 */
+    margin-top: 3%;
+}
+.content {
+    margin: auto; /* 수직 및 수평 중앙 정렬 */
+    /* 추가 스타일링 */
+}
+
+.login-input {
+    width: 30vh !important;
+}
