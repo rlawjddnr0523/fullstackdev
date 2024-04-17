@@ -16,7 +16,6 @@ function Searchbar() {
             <Stack direction='horizontal' gap={3}>
                 <Form.Control className="" placeholder='Search'/>
                 <Button variant='secondary'>검색</Button>
-                <div className="vr"/>
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                         {filter}
