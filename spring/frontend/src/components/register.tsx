@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Button, Form, FormGroup} from 'react-bootstrap';
 import Header from "../pages/header";
 import '../App.css';
@@ -15,6 +15,8 @@ import {
     PwdstrengthIndicator,
     ConfirmPwdIndicator
 } from "../logic/passwordIndicators";
+import {sendRequest} from "../api/registerRequest";
+import checkDuplicateRequest from "../api/checkDuplicateRequest";
 
 const RegisterFinal = () => {
     return (
@@ -33,53 +35,79 @@ const RegisterForm = () => {
     const [strengthPassword, setStrengthPassword] = useState('');
     const [pwdAlert, setPwdAlert] = useState('');
     const [isIdChecked, setIsIdChecked] = useState(false);
+    const [email, setEmail] = useState('');
+    const [birthDate, setBirthDate] = useState('');
 
-    const handleCheckDuplicate = () => {
-        // handle Logic on here
-        alert('중복확인을 진행합니다.');
-        setIsIdChecked(true);
-        console.log(isIdChecked);
+
+    // `handleCheckDuplicate` 함수는 중복확인 버튼을 클릭했을때 중복확인을 진행하는 함수입니다. (미완성)
+    const handleCheckDuplicate = async () => {
+        const check = await checkDuplicateRequest(userId);
+        if (check === true) {
+            alert('이미 존재하는 아이디입니다.');
+            return;
+        } else if (check === false) {
+            setIsIdChecked(true);
+            alert('사용 가능한 아이디입니다.');
+        }
     };
 
+    // `handlePasswordChange` 함수는 비밀번호를 입력 받을 때 마다 업데이트되어 `passwordIndicator`의 상태를 결정합니다.
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
+
+        // 비밀번호 강도 초기값 설정
+        let pwdAlertStatus = '약함';
+        let strengthStatus = '';
+
         if (newPassword.length > 8) {
-            setPwdAlert('강함');
+            pwdAlertStatus = '강함';
         } else if (newPassword.length > 4) {
-            setPwdAlert('보통');
-        } else if (newPassword.length >= 0) {
-            setPwdAlert('약함');
+            pwdAlertStatus = '보통';
         }
+
+        // 비밀번호 조건 검사
         if (hasSequential(newPassword)) {
-            setStrengthPassword('error1');
-        } if (hasRepeatedChars(newPassword)) {
-            setStrengthPassword('error2');
-        } if (!passwordHasLetter(newPassword)) {
-            setStrengthPassword('error3');
-        } if (passwordHasSpecialChars(newPassword)) {
-            setStrengthPassword('error4');
-        } if (validatePassword(newPassword)) {
-            setStrengthPassword('no-error');
+            strengthStatus = 'error1';
+        } else if (hasRepeatedChars(newPassword)) {
+            strengthStatus = 'error2';
+        } else if (!passwordHasLetter(newPassword)) {
+            strengthStatus = 'error3';
+        } else if (!passwordHasSpecialChars(newPassword)) {
+            strengthStatus = 'error4';
+        } else if (validatePassword(newPassword)) {
+            strengthStatus = 'no-error';
         }
+
+        // 상태 업데이트
+        setPwdAlert(pwdAlertStatus);
+        setStrengthPassword(strengthStatus);
     };
 
+    // `handlePasswordConfirm` 함수는 비밀번호 확인란에 비밀번호를 입력했을 때 위에 입력한 비밀번호 필드에 있는 비밀번호와 비밀번호확인란의 값을 대조해서 `confirmPasswordStatus`의 상태를 결정합니다.
     const handlePasswordConfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentConfirmPassword = event.target.value;
         setConfirmPassword(currentConfirmPassword);
     };
+
     // `confirmPasswordStatus`를 추가하여 상태에 따라 '확인됨' 또는 '다름'을 결정합니다.
     const confirmPasswordStatus = password === confirmPassword ? '확인됨' : '다름';
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!isIdChecked) {
             alert('아이디 중복 확인이 필요합니다.');
             return;
+        } else if (!validatePassword(password)) {
+            alert('비밀번호를 확인해주시기 바랍니다.');
+            return;
+        } else {
+            sendRequest(userId, password, email, new Date(birthDate)).then(response => {
+                console.log('요청 성공 : ', response);
+            }).catch(error => {
+                console.log('요청 실패 : ',error);
+            })
         }
-        // if (!validatePassword(password)) {
-        //     alert('비밀번호의 형식을 지켜주세요!');
-        //     return;
-        // }
     };
     return (
         <div className="register-form">
@@ -137,6 +165,7 @@ const RegisterForm = () => {
                         <Form.Control
                             className="login-input"
                             type="email"
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder='이메일을 입력해주세요'
                         />
                     </Form.Group>
@@ -146,6 +175,7 @@ const RegisterForm = () => {
                             className="login-input"
                             type="date"
                             placeholder="생년월일을 입력해주세요"
+                            onChange={(e) => setBirthDate(e.target.value)}
                             required
                         />
                     </FormGroup>
