@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function sendRequest(username: string, password: string, email: string, birthdate: Date) {
+const sendRequest = async (username: string, password: string, email: string, birthdate: string) => {
     try {
         // Spring Boot 서버의 엔드포인트 URL
         const url = 'http://localhost:8080/api/v1/regist';
@@ -19,16 +19,19 @@ async function sendRequest(username: string, password: string, email: string, bi
 
         // 응답 데이터 출력
         console.log("응답 데이터 : ",response.data);
+        return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
             // Axios 에러 처리
-            console.error('Axios 에러 : ', error.message)
+            console.error('Axios 에러 : ', error.message);
+            return 'AxiosError';
         } else {
             // 기타 에러 처리
             console.error('기타 에러 : ', error);
+            return 'ETCError'
         }
     }
-}
+};
 
 export {
     sendRequest

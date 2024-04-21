@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Form} from 'react-bootstrap';
-import Header from "../pages/header";
+import Header from "../partComponent/header";
 import '../App.css';
 import {Link} from "react-router-dom"; // 스타일 시트 불러오기
 

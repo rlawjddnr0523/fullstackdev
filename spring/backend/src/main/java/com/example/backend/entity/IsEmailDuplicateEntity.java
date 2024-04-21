@@ -6,10 +6,9 @@ import lombok.Setter;
 
 @Getter @Setter
 @Entity @Table(name = "user_data")
-public class IsUserIdDuplicateEntity {
+public class IsEmailDuplicateEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String username;
+    private String email;
 
-    public IsUserIdDuplicateEntity() {
-    }
+    public IsEmailDuplicateEntity() {}
 }

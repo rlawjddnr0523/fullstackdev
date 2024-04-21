@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const checkDuplicateRequest = async (username: string) => {
+const checkDuplicateEmailRequest = async (email: String) => {
     try {
-        const response = await axios.get('http://localhost:8080/api/v1/logics/check-username-duplicate', {
+        const response = await axios.get('http://localhost:8080/api/v1/logics/check-email-duplicate', {
             params: {
-                username: username,
+                email: email,
             }
         });
         // console.log(response)
@@ -12,7 +12,8 @@ const checkDuplicateRequest = async (username: string) => {
         return response.data;
     } catch (error) {
         console.error('Error during the API Call', error);
+        return 'error';
     }
 };
 
-export default checkDuplicateRequest;
+export default checkDuplicateEmailRequest;

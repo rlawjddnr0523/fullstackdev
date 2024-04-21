@@ -59,3 +59,9 @@ a {
 .login-input {
     width: 30vh !important;
 }
+.login-year-input {
+    width: 12vh !important;
+}
+.login-date-input {
+    width: 9vh !important;
+}

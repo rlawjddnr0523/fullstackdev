@@ -1,7 +1,7 @@
 import '../App.css';
-import Header from "../pages/header";
-import Sections from "../pages/bodySection";
-import Footer from "../pages/footer";
+import Header from "../partComponent/header";
+import Sections from "../partComponent/bodySection";
+import Footer from "../partComponent/footer";
 
 function FinalExport() {
     return (
