@@ -14,6 +14,8 @@ import {sendRequest} from "../api/registerRequest";
 import checkDuplicateRequest from "../api/checkDuplicateRequest";
 import checkDuplicateEmailRequest from "../api/checkDuplicateEmailRequest";
 import {BirthFormInputComponent, FormInputComponent} from "../tsxComponent/FormInputComponent";
+import SHA512 from 'crypto-js/sha512'
+import Base64 from 'crypto-js/enc-base64'
 
 // 회원가입 컴포넌트 최종 출력 컴포넌트입니다.
 const RegisterFinal = () => {
@@ -33,6 +35,7 @@ const RegisterForm = () => {
     // 로그인에 필요한 기본 정보를 저장하는 State 상수
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const [hashedPassword, setHashedPassword] = React.useState('');
     const [email, setEmail] = useState('');
 
     // 생년월일 지정하는 State 상수
@@ -67,8 +70,10 @@ const RegisterForm = () => {
     // `handlePasswordChange` 함수는 비밀번호를 입력 받을 때 마다 업데이트되어 `passwordIndicator`의 상태를 결정합니다.
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = event.target.value;
+        const HashedPassword = Base64.stringify(SHA512(newPassword));
         setPassword(newPassword);
-
+        setHashedPassword(HashedPassword);
+        console.log(HashedPassword)
         // 비밀번호 강도 초기값 설정
         let pwdAlertStatus = '약함';
         let strengthStatus = '';
@@ -143,7 +148,7 @@ const RegisterForm = () => {
         // 본격적 회원가입 요청문
         try {
             // 회원가입 api 요청을 보냅니다.
-            const response = await sendRequest(userId, password, email, birthDate);
+            const response = await sendRequest(userId, hashedPassword, email, birthDate);
             // 회원가입 요청중 '에러'를 반환한다면 api 호출중 오류가 발생하였음을 알립니다.
             if (response === 'error') {
                 alert('API 호출 중에 오류가 발생하였습니다.');
@@ -172,6 +177,9 @@ const RegisterForm = () => {
                 }}>
                     회원가입
                 </h2>
+                <h1>
+
+                </h1>
                 {/* 폼 제출 시 handleSubmit 함수를 호출합니다. */}
                 <Form onSubmit={handleSubmit}>
                     {/* 아이디 입력란입니다. */}

@@ -2,27 +2,36 @@ import React from 'react';
 import {Button, Form} from 'react-bootstrap';
 import Header from "../partComponent/header";
 import '../App.css';
-import {Link} from "react-router-dom"; // 스타일 시트 불러오기
+import {Link} from "react-router-dom";
+import Base64 from "crypto-js/enc-base64";
+import SHA512 from "crypto-js/sha512"; // 스타일 시트 불러오기
 
 const LoginFinal = () => {
     return (
         <>
             <Header />
             <div className="login-container"> {/* 로그인 폼을 중앙에 배치하기 위한 컨테이너 추가 */}
-                {LoginForm()}
+                {Login()}
             </div>
         </>
     )
 }
 
-const LoginForm = () => {
+const Login = () => {
     const [userId, setUserId] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [hashedPassword, setHashedPassword] = React.useState('');
+
+    const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newPassword = e.target.value;
+        setPassword(e.target.value);
+        const hashedPassword = Base64.stringify(SHA512(newPassword));
+        setHashedPassword(hashedPassword);
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log('User ID:', userId);
-        console.log('Password:', password);
+
     };
 
     return (
@@ -44,6 +53,7 @@ const LoginForm = () => {
                             placeholder="ID를 입력해주세요"
                             value={userId}
                             onChange={(e) => setUserId(e.target.value)}
+                            required
                         />
                     </Form.Group>
 
@@ -54,7 +64,8 @@ const LoginForm = () => {
                             type="password"
                             placeholder="비밀번호를 입력해주세요"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChangePassword}
+                            required
                         />
                     </Form.Group>
 

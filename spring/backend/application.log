@@ -1,19 +1,10 @@
-2024-04-22T01:01:39.484+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/logics/check-username-duplicate?username=test1234", parameters={masked}
-2024-04-22T01:01:39.493+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-8] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.backend.controller.IsUserIdDuplicateController#checkUsernameDuplicate(String)
-2024-04-22T01:01:39.526+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2024-04-22T01:01:39.527+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [false]
-2024-04-22T01:01:39.530+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2024-04-22T01:02:02.780+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/logics/check-email-duplicate?email=manager1twopp-noreply%40twopp.com", parameters={masked}
-2024-04-22T01:02:02.782+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.backend.controller.IsEmailDuplicateController#checkEmailDuplicate(String)
-2024-04-22T01:02:02.801+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2024-04-22T01:02:02.802+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [false]
-2024-04-22T01:02:02.804+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2024-04-22T01:02:02.809+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : OPTIONS "/api/v1/regist", parameters={}
-2024-04-22T01:02:02.810+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.backend.controller.RegistEntityController#createUser(RegistDto)
-2024-04-22T01:02:02.811+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2024-04-22T01:02:02.812+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/v1/regist", parameters={}
-2024-04-22T01:02:02.812+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.backend.controller.RegistEntityController#createUser(RegistDto)
-2024-04-22T01:02:02.814+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.example.backend.dto.RegistDto@3cf37135]
-2024-04-22T01:02:02.829+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2024-04-22T01:02:02.830+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.example.backend.entity.RegistEntity@67a35303]
-2024-04-22T01:02:02.831+09:00 DEBUG 40194 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2024-04-23T01:03:20.023+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m56s441ms).
+2024-04-23T01:56:07.755+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52m47s733ms).
+2024-04-23T02:33:28.663+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=37m20s908ms).
+2024-04-23T03:29:59.878+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56m31s215ms).
+2024-04-23T04:40:12.653+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h10m12s775ms).
+2024-04-23T05:25:33.624+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=45m20s971ms).
+2024-04-23T06:22:03.384+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56m29s760ms).
+2024-04-23T07:00:10.991+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=38m7s607ms).
+2024-04-23T07:41:53.636+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=41m42s645ms).
+2024-04-23T08:23:19.113+09:00  WARN 63539 --- [backend] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=41m25s476ms).

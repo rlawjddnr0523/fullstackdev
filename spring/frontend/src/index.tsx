@@ -7,7 +7,7 @@ import Status from "./partComponent/status";
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LoginFinal from './components/loginForm';
+import LoginFinal from './components/login';
 import RegisterFinal from "./components/register";
 import Admin from './components/adminpage';
 

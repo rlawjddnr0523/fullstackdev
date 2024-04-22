@@ -1,15 +1,13 @@
 import axios from 'axios';
 
-const sendRequest = async (username: string, password: string, email: string, birthdate: string) => {
+const sendLoginRequest = async (username: string, password: string) => {
     try {
         // Spring Boot 서버의 엔드포인트 URL
-        const url = 'http://localhost:8080/api/v1/regist';
+        const url = 'http://localhost:8080/api/v1/login';
         // 요청 본문 데이터
         const data = {
             username: username,
             password: password,
-            email: email,
-            birthdate: birthdate,
             // 여기에 필요한 데이터를 추가하세요
         };
         // POST 요청보내기
@@ -32,5 +30,5 @@ const sendRequest = async (username: string, password: string, email: string, bi
 };
 
 export {
-    sendRequest
+    sendLoginRequest
 };
