@@ -2,9 +2,10 @@ import React from 'react';
 import {Button, Form} from 'react-bootstrap';
 import Header from "../partComponent/header";
 import '../App.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Base64 from "crypto-js/enc-base64";
-import SHA512 from "crypto-js/sha512"; // 스타일 시트 불러오기
+import SHA512 from "crypto-js/sha512";
+import {sendLoginRequest} from "../api/loginRequest";
 
 const LoginFinal = () => {
     return (
@@ -22,6 +23,8 @@ const Login = () => {
     const [password, setPassword] = React.useState('');
     const [hashedPassword, setHashedPassword] = React.useState('');
 
+    const navigate = useNavigate();
+
     const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = e.target.value;
         setPassword(e.target.value);
@@ -29,9 +32,29 @@ const Login = () => {
         setHashedPassword(hashedPassword);
     }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        if (userId === '' || password === '') {
+            alert('공란으로 제출이 불가능합니다.');
+            return;
+        }
+        try {
+            const response = await sendLoginRequest(userId, hashedPassword)
+            if (response === 400) {
+                alert("로그인 요청중에 에러가 발생하였습니다.")
+                return;
+            } else if (response === 401) {
+                alert("로그인에 실패하였습니다. 아이디나 비밀번호를 확인해주세요.")
+                return;
+            } else if (response === 200) {
+                alert("로그인 되었습니다.");
+                navigate('/');
+                return;
+            }
+        } catch (e) {
+            console.log('request failed!')
+            return;
+        }
     };
 
     return (

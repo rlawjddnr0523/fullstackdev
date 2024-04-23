@@ -1,9 +1,52 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Link, NavLink} from "react-router-dom";
-// @ts-ignore
+import {Link, NavLink, useNavigate} from "react-router-dom";
+import React, {useEffect} from "react";
+import {checkSessionRequest} from "../api/checkSession";
+import {sendLogoutRequest} from "../api/logoutReqest";
+
 function Navigation() {
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    const navigate = useNavigate();
+    // const handlelogout = async () => {
+    //     try {
+    //         const response = await sendLogoutRequest();
+    //
+    //         if (response === 200) {
+    //             alert('로그아웃 되었습니다.');
+    //             navigate('/');
+    //             return
+    //         } else if (response === 404) {
+    //             alert('로그인이 되어있지 않습니다.');
+    //             return;
+    //         } else if (response === 400) {
+    //             alert('로그아웃에 실패하였습니다.');
+    //             return;
+    //         }
+    //     } catch (e) {
+    //         console.log('request failed!');
+    //     }
+    // }
+    useEffect(()=> {
+        async function response() {
+            try {
+                const response = await checkSessionRequest();
+                if (response === 200) {
+                    setIsLoggedIn(true);
+                    console.log(response)
+                } else if (response === 202) {
+                    setIsLoggedIn(false);
+                } else if (response === 400) {
+                    setIsLoggedIn(false);
+                    console.log('error! : bad request 400 on ://localhost:8080/')
+                }
+            } catch (e) {
+                console.log('error while requesting session :', e)
+            }
+        }
+        response();
+    })
     return (
         <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
             <Container className=''>
@@ -19,12 +62,24 @@ function Navigation() {
                 </Navbar.Collapse>
                 <Navbar.Collapse className='justify-content-end'>
                     <Navbar.Text>
-                        {/*not-thing*/}
+                        {!isLoggedIn && (
+                            <Nav variant='underline'>
+                                <NavLink to='/login' data-bs-theme='dark'>로그인</NavLink>
+                                <NavLink to='/register' data-bs-theme='dark'>회원가입</NavLink>
+                            </Nav>
+                        )} {isLoggedIn && (
+                            <Nav variant='underline'>
+                                <NavLink to="/myinfo" data-bs-theme='dark'>프로필</NavLink>
+                                {/*<label data-bs-theme='dark' onClick={handlelogout}>로그아웃</label>*/}
+                            </Nav>
+                        )}
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     );
 }
+
+
 
 export default Navigation;

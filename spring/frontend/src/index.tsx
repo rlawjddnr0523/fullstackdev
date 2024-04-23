@@ -15,14 +15,14 @@ import Admin from './components/adminpage';
 createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter>
-            <Routes>
-                <Route path='admin1' element={<Admin />} />
-                <Route path='/' element={<FinalExport />} />
-                <Route path='post' element={<Post />} />
-                <Route path='status' element={<Status />} />
-                <Route path='login' element={<LoginFinal />} />
-                <Route path='register' element={<RegisterFinal />} />
-            </Routes>
+                <Routes>
+                    <Route path='admin1' element={<Admin />} />
+                    <Route path='/' element={<FinalExport />} />
+                    <Route path='post' element={<Post />} />
+                    <Route path='status' element={<Status />} />
+                    <Route path='login' element={<LoginFinal />} />
+                    <Route path='register' element={<RegisterFinal />} />
+                </Routes>
         </BrowserRouter>
     </React.StrictMode>
 );
