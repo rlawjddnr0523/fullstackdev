@@ -7,14 +7,14 @@ const checkSessionRequest = async () => {
 
         // POST 요청보내기
         const response = await axios.get(url);
-
+        console.log(response.status + response.data);
         // 응답 데이터 출력
-        if (response.status === 200) {
-            return response.status;
-        } else if (response.status === 202) {
-            return response.status;
+        if (response.data === true) {
+            return true;
+        } else if (response.data === false) {
+            return false;
         } else if (response.status === 400) {
-            return response.status;
+            return 'error';
         }
         console.log("응답 데이터 : ",response.data);
     } catch (error) {

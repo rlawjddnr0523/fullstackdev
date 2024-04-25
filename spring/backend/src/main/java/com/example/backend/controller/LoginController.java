@@ -21,7 +21,8 @@ public class LoginController {
             String username = credentials.get("username");
             String password = credentials.get("password");
             if (loginService.authenticate(username,password)) {
-                session.setAttribute("login-status", true);
+                session.setAttribute("username", username);
+                session.setAttribute("uid", username);
                 return ResponseEntity.ok().body(true);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
@@ -46,7 +47,7 @@ public class LoginController {
     @GetMapping("/login-status")
     public ResponseEntity<?> getLoginStatus(HttpSession session) {
         if (session.getAttribute("login-status") == null) {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(false);
+            return ResponseEntity.status(HttpStatus.IM_USED).body(false);
         } else {
             try {
                 session.getAttribute("login-status");
