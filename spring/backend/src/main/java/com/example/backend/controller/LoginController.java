@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 @RestController
@@ -33,7 +32,7 @@ public class LoginController {
     }
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
-        if (session.getAttribute("login-status") == null) {
+        if (session.getAttribute("username") == null && session.getAttribute("uid") == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
         } else {
             try {
@@ -46,11 +45,11 @@ public class LoginController {
     }
     @GetMapping("/login-status")
     public ResponseEntity<?> getLoginStatus(HttpSession session) {
-        if (session.getAttribute("login-status") == null) {
+        if (session.getAttribute("username") == null) {
             return ResponseEntity.status(HttpStatus.IM_USED).body(false);
         } else {
             try {
-                session.getAttribute("login-status");
+                session.getAttribute("username");
                 return ResponseEntity.ok().body(true);
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("requesting Error!");

@@ -35,6 +35,7 @@ function Navigation() {
                 console.log(response)
                 if (response === true) {
                     setIsLoggedIn(true);
+                    console.log('콘솔로그')
                 } else if (response === 'error') {
                     console.log('error! : bad request 400 on ://localhost:8080/');
                 }
@@ -55,25 +56,19 @@ function Navigation() {
                         <NavLink to='/' data-bs-theme='dark' className='text-light-emphasis nav-link'>메인</NavLink>
                         <NavLink to='/post' data-bs-theme='dark' className='text-light-emphasis nav-link'>게시물</NavLink>
                         <NavLink to='/status' data-bs-theme='dark' className='text-light-emphasis nav-link'>서비스상태</NavLink>
-                        {!isLoggedIn && (
-                            <>
-                                <NavLink to='/login' data-bs-theme='dark' className='text-light-emphasis nav-link'>로그인</NavLink>
-                                <NavLink to='/register' data-bs-theme='dark' className='text-light-emphasis nav-link'>회원가입</NavLink>
-                            </>
-                        )}
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className='justify-content-end'>
                 <Navbar.Text>
                     {isLoggedIn ? (
                         <Nav variant='underline'>
-                            <NavLink to="/myinfo" data-bs-theme='dark'>Profile</NavLink>
-                            <label style={{ cursor: 'pointer' }} data-bs-theme='dark' onClick={handleLogout}>Logout</label>
+                            <NavLink to="/myinfo" data-bs-theme='dark'>프로필</NavLink>
+                            <label style={{ cursor: 'pointer' }} data-bs-theme='dark' onClick={handleLogout}>로그아웃</label>
                         </Nav>
                     ) : (
                         <Nav variant='underline'>
-                            <NavLink to='/login' data-bs-theme='dark'>Login</NavLink>
-                            <NavLink to='/register' data-bs-theme='dark'>Register</NavLink>
+                            <NavLink to='/login' data-bs-theme='dark'>로그인</NavLink>
+                            <NavLink to='/register' data-bs-theme='dark'>회원가입</NavLink>
                         </Nav>
                     )}
                 </Navbar.Text>

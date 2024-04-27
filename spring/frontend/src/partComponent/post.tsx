@@ -1,3 +1,4 @@
+import { log } from 'console';
 import '../App.css';
 import Header from "./header";
 function Post() {
